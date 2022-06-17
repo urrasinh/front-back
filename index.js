@@ -22,13 +22,17 @@ app.use( // carga de archivo
     responseOnLimit: "El peso del archivo que intentas subir supera el limite permitido",
 })
 )
-app.use('/css', express.static(__dirname + 'node_modules/bootstrap/dist/css')) 
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')) 
 // configuracion de Handlebars
 app.engine(
     'handlebars',
-    exphbs({
+    exphbs.engine({
         defaultLayout: 'main',
-        layotsDir: `${__dirname}/views/mainLayout`,
+        layoutsDir: `${__dirname}/views/mainLayout`,
     })
 )
-app.set('view engine', 'handlebras')
+app.set('view engine', 'handlebars')
+
+app.get('/', function (req, res) {
+    res.render('Home')
+})
